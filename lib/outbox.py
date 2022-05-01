@@ -4,6 +4,7 @@ import aiosmtplib
 from secret import EMAIL_HOST, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD
 
 async def send_rate_email(to_email, from_code, to_code, rate):
+    # FIXME check this is a valid email address?
     message = EmailMessage()
     message["From"]    = "noreply@linuxsoftware.nz"
     message["To"]      = to_email

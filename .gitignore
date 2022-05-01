@@ -20,5 +20,6 @@
 /htmlcov/
 /node_modules/
 __pycache__/
+scratch/
 secret.ini
 secret.py

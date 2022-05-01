@@ -6,6 +6,9 @@ from aiohttp_rpc import rpc_server
 from currency import get_conversion_rate
 from outbox import send_rate_email
 
+async def homepage(request):
+    return web.FileResponse("static/html/index.html")
+
 async def send_rate(to_email, from_code, to_code):
     """
     Look up the currency exchange rate for the given currency codes and
@@ -22,10 +25,9 @@ async def send_rate(to_email, from_code, to_code):
 
 def create_app(argv):
     rpc_server.add_methods([send_rate])
+    routes = [web.get("/", homepage),
+              web.static("/static", "static"),
+              web.post("/rpc", rpc_server.handle_http_request) ]
     app = web.Application()
-    app.add_routes([web.post('/rpc', rpc_server.handle_http_request),])
+    app.add_routes(routes)
     return app
-
-if __name__ == '__main__':
-    app = create_app(sys.argv)
-    web.run_app(app)
