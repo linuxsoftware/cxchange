@@ -14,6 +14,7 @@ async def send_rate(to_email, from_code, to_code):
     Look up the currency exchange rate for the given currency codes and
     email it to the given email address.
     """
+    #print(to_email,from_code,to_code)
     async def do_task():
         rate = await get_conversion_rate(from_code, to_code)
         await send_rate_email(to_email, from_code, to_code, rate)
